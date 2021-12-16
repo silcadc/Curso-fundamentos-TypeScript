@@ -1,3 +1,4 @@
+export {};
 // Crear una fotografia
 // function createPicture(title, date, size) {
 //     //title
@@ -31,6 +32,7 @@ createPicture();//funciona muy bien la ejecucion de la function
 
 //Flat array function
 //se usa desde el EC6, es la forma plana para crear nuestras funciones
+//es una nueva sintaxis
 let createPic = (title: string, date: string, size: squareSize): object => {
     // return {
     //     title: title,
@@ -47,3 +49,26 @@ let createPic = (title: string, date: string, size: squareSize): object => {
 const picture = createPic('Platzi session', '2020-03-10', '100x100');
 console.log('picture', picture);
 
+//tipo de retorno en funciones con TS
+//TS me ayuda en los tipos de retorno
+
+function handleError(code: number, message: string): never | string {//aqui defino dos tipos de retorno
+    //never es un tipo de dato que relanza un error desde la funcion
+    // | el operador pipe indica la union de tipos
+    //Procesamiento del cod, mensaje
+    if(message === 'error') {//de esta manera se ejecutara nuestra funcion
+        throw new Error(`${message}. Code error: ${code}`);
+    } else {
+        return 'An error has occurred';
+    }
+}
+
+try {
+    let result = handleError(200, 'ok');//string
+    console.log('result', result);
+    result = handleError(400, 'error');//never, nunaca retorna un valor valido
+    console.log('result', result);
+} catch (error) {
+
+}
+//null y undefined son subtipos de datos

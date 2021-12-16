@@ -1,7 +1,5 @@
-// Crear una fotografia
-// function createPicture(title, date, size) {
-//     //title
-// }
+"use strict";
+exports.__esModule = true;
 //usamos TS y definimos tipos para parametros
 // function createPicture(title: string, date: string, size: squareSize) {
 //     //se crea la fotografia
@@ -26,6 +24,7 @@ createPicture('Colombia Trip');
 createPicture(); //funciona muy bien la ejecucion de la function
 //Flat array function
 //se usa desde el EC6, es la forma plana para crear nuestras funciones
+//es una nueva sintaxis
 var createPic = function (title, date, size) {
     // return {
     //     title: title,
@@ -40,3 +39,25 @@ var createPic = function (title, date, size) {
 };
 var picture = createPic('Platzi session', '2020-03-10', '100x100');
 console.log('picture', picture);
+//tipo de retorno en funciones con TS
+//TS me ayuda en los tipos de retorno
+function handleError(code, message) {
+    //never es un tipo de dato que relanza un error desde la funcion
+    // | el operador pipe indica la union de tipos
+    //Procesamiento del cod, mensaje
+    if (message === 'error') { //de esta manera se ejecutara nuestra funcion
+        throw new Error("".concat(message, ". Code error: ").concat(code));
+    }
+    else {
+        return 'An error has occurred';
+    }
+}
+try {
+    var result = handleError(200, 'ok'); //string
+    console.log('result', result);
+    result = handleError(400, 'error'); //never, nunaca retorna un valor valido
+    console.log('result', result);
+}
+catch (error) {
+}
+//null y undefined son subtipos de datos
