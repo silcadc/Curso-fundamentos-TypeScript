@@ -1,0 +1,49 @@
+// Crear una fotografia
+// function createPicture(title, date, size) {
+//     //title
+// }
+
+type squareSize = '100x100' | '500x500' | '1000x100';
+//usamos TS y definimos tipos para parametros
+// function createPicture(title: string, date: string, size: squareSize) {
+//     //se crea la fotografia
+//     console.log('create Picture Using', title, date, size);
+// }
+// createPicture('My Birthday', '2020-03-10', '500x500');
+//createPicture('Colombia Trip', '2020-03');//si no completo mi cod tendre un error
+//puesto que la funcion esta relacionada con 3 parametros y no con solo dos.
+//para eso debo hacer uso de los parametros opcionales
+
+//Parametros opcionales en funciones
+//estos son un mecanismo para permitir el paso de diferentes valores
+//o maneras diferentes de utilizar la funcion. a traves del uso de ?
+//despues del nombre de la variable. esto le indica a TS que puede que
+//no llegue ese valor dentro de la function
+
+function createPicture(title?: string, date?: string, size?: squareSize) {
+    //se crea la fotografia
+    console.log('create Picture Using', title, date, size);
+}
+createPicture('My Birthday', '2020-03-10', '500x500');
+createPicture('Colombia Trip', '2020-03');
+createPicture('Colombia Trip');
+createPicture();//funciona muy bien la ejecucion de la function
+
+//Flat array function
+//se usa desde el EC6, es la forma plana para crear nuestras funciones
+let createPic = (title: string, date: string, size: squareSize): object => {
+    // return {
+    //     title: title,
+    //     date: date,
+    //     size: size
+    // };
+    return {
+        title,
+        date,
+        size
+    };
+};
+
+const picture = createPic('Platzi session', '2020-03-10', '100x100');
+console.log('picture', picture);
+
