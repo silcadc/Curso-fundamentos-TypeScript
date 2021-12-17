@@ -12,18 +12,25 @@ var photoOrientation;
     photoOrientation[photoOrientation["panorama"] = 3] = "panorama";
 })(photoOrientation || (photoOrientation = {}));
 ;
-function showPicture(picture) {
-    console.log("[title: ".concat(picture.title, ",\n                date: ").concat(picture.date, ",\n                orientacion: ").concat(picture.orientation, "]"));
+function generatePicture(config) {
+    var pic = { title: 'Default', date: '2020-03' };
+    if (config.title) {
+        pic.title = config.title;
+    }
+    if (config.date) {
+        pic.date = config.date;
+    }
+    return pic;
 }
-;
-var myPic = {
-    title: 'test Title',
-    date: '2020-03',
-    orientation: photoOrientation.landScape
-};
-showPicture(myPic);
-showPicture({
-    title: 'Test',
-    date: '2021-12',
-    orientation: photoOrientation.portrait
-});
+var picture = generatePicture({}); //acepta un objeto vacio porque son propiedas opcionales
+console.log('picture : ', picture);
+picture = generatePicture({ title: 'Travel Pic' });
+console.log('picture : ', picture);
+picture = generatePicture({ title: 'Travel Pic', date: '2012-05' }); //aca se reasigna el date
+console.log('picture : ', picture);
+var user; //tipo de dato user
+user = { id: 10, username: 'siledangond', isPro: true }; //asignamos un obj user
+console.log('user : ', user);
+user.username = 'paparazzi';
+// user.id = 20; //Error//no me permite reasignar, solo lectura x readonly
+console.log('user : ', user); //puedo cambiar o reasignar el user
