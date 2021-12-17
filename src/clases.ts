@@ -2,7 +2,6 @@ export {};
 //una clase en TS es la astraccion de un conjunto de objetos
 //para definir una entidad usuario, puedo hacer uso de una clase usuario
 //dentro de la definicion necesito una function especial
-//console.clear();
 
 enum PhotoOrientation {
     Landscape = 'Landscape',
@@ -10,16 +9,6 @@ enum PhotoOrientation {
     Square = 'Square',
     Panorama = 'Panorama',
 }//para definir una clase utilizo la palabra reservada class
-
-// interface Entity {
-//   id: number;
-//   title: string;
-// }
-
-// class Entity {
-//     id: number;
-//     title: string;
-//   }
 
 class Picture {
     //defino las propiedades de esta entidad
@@ -66,11 +55,7 @@ class Album {
 
 const album: Album = new Album(1, 'personal picture');
 const picture: Picture = new Picture(1, 'TypeScript', PhotoOrientation.Square);
-// const picture1 = new Picture(201, 'korn', PhotoOrientation.Square);
-// console.log(picture);
-// console.log(picture1);
 album.addPicture(picture);
-// album.addPicture(picture1);
 console.log('album', album);
 
 //clases miembros publicos

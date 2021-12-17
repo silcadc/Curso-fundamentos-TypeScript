@@ -3,7 +3,6 @@ exports.__esModule = true;
 //una clase en TS es la astraccion de un conjunto de objetos
 //para definir una entidad usuario, puedo hacer uso de una clase usuario
 //dentro de la definicion necesito una function especial
-//console.clear();
 var PhotoOrientation;
 (function (PhotoOrientation) {
     PhotoOrientation["Landscape"] = "Landscape";
@@ -11,14 +10,6 @@ var PhotoOrientation;
     PhotoOrientation["Square"] = "Square";
     PhotoOrientation["Panorama"] = "Panorama";
 })(PhotoOrientation || (PhotoOrientation = {})); //para definir una clase utilizo la palabra reservada class
-// interface Entity {
-//   id: number;
-//   title: string;
-// }
-// class Entity {
-//     id: number;
-//     title: string;
-//   }
 var Picture = /** @class */ (function () {
     //ahora necesito definir una funcion especial para crear objetos a partir
     //de la clase Picture definido, por lo cual es necesario un constructor
@@ -54,11 +45,7 @@ var Album = /** @class */ (function () {
 }());
 var album = new Album(1, 'personal picture');
 var picture = new Picture(1, 'TypeScript', PhotoOrientation.Square);
-// const picture1 = new Picture(201, 'korn', PhotoOrientation.Square);
-// console.log(picture);
-// console.log(picture1);
 album.addPicture(picture);
-// album.addPicture(picture1);
 console.log('album', album);
 //clases miembros publicos
 //TS define un modificador de acceso publico por defecto para los miembros de cla.
