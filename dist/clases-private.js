@@ -1,8 +1,9 @@
 "use strict";
 exports.__esModule = true;
-//una clase en TS es la astraccion de un conjunto de objetos
-//para definir una entidad usuario, puedo hacer uso de una clase usuario
-//dentro de la definicion necesito una function especial
+//clases privadas
+//clases miembros pivados
+//TS define una manera propia de declarar o marcar un miembro como privado usando la
+//palabra reservada private
 var PhotoOrientation;
 (function (PhotoOrientation) {
     PhotoOrientation["Landscape"] = "Landscape";
@@ -50,17 +51,14 @@ console.log('album', album);
 //clases miembros publicos
 //TS define un modificador de acceso publico por defecto para los miembros de cla.
 //Tambien es posible marcar un miembro como publico usando la palabra reservada public
-//accediendo a los miembros publicos
-picture.id = 100; //el acceso para cada uno de estos miembros es publico
-//nada nos impide que podamos cambiar sus estados
-picture.title = 'Another title';
-album.title = 'Personal Activities';
+//accediendo a los miembros publicos que ahora son privados
+// picture.id = 100;//el acceso para cada uno de estos miembros es private
+// //nos impide que podamos cambiar sus estados
+// picture.title = 'Another title';//private
+// album.title = 'Personal Activities';//private
 console.log('album', album);
-//TS considera un modificador de acceso denominado public por defecto para cada uno
-//de los miembros, tambien puedo ser explicita indicando la palabra reservada public
-//que tan conveniente es mantener el acceso publico a los atributos o funciones de la clase?
-//hay escnarios donde no dberia ser asi.
-//para eso existen los miembros privados
-//clases miembros pivados
-//TS define una manera propia de declarar o marcar un miembro como privado usando la
-//palabra reservada private
+//miembros privados EC
+//TS tambien soporta (a partir de la v3.8) la nueva sintaxis JS
+//para miembros privados: #atributo
+//esta caracteristica puede ofrecer mejores garantias de
+//aislamiento en miembros privados
