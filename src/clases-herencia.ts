@@ -1,5 +1,11 @@
+////Herencia de clases y propiedades estaticas
 export {};
 //hemos reutilizado el cod del file clases-get-set.ts//
+
+//Herencia de clases y miembros protegidos
+//TS soporta este patron comun en el mundo de la POO.
+// implementa la habilidad de extender  cod de clases existentes
+// a traves de la herencia
 enum PhotoOrientation {
     Landscape = 'Landscape',
     Portrait = 'Portrait',
@@ -8,8 +14,11 @@ enum PhotoOrientation {
 }
 
 // SUPERclase
-abstract class Item {
-    protected readonly _id: number;
+//es la nueva clase donde podre definir las propiedades id y title, compartidas por
+//2 clases mas abajo
+class Item {
+    protected _id: number;//protected da acceso a las subclases,
+    //no es publico ni privado, acceso intermedio
     protected _title: string;
 
     constructor(id: number, title: string) {
@@ -23,7 +32,7 @@ abstract class Item {
     set id(id: number) {
         this._id = id;
     }
-    
+
     get title() {
         return this._title;
     }
@@ -33,13 +42,17 @@ abstract class Item {
 }
 
 //GET Y SET
-class Picture extends Item{
+class Picture extends Item{//mi clase Picture extiende desde mi Super clase Item
+    //los atributos id y title eran compartido por la class Picture y Album por lo cual
+    //se almacenan en una Super clase para de esa forma ahorrar cod con la herencia
     private _orientation: PhotoOrientation;
 
     public constructor(id: number,
                 title: string,
-                orientation: PhotoOrientation) {
-        super(id, title);
+                orientation: PhotoOrientation) {//en este punto yo espero recibir
+    //los mismos valores, id, title, orientation a la hora de crear un obj
+        super(id, title);//utilizo la palabra reservada super, como funion especial
+    //via la funcion super estoy invocando al constructor de la Super Clase Item
         this._orientation = orientation;
     };
 
@@ -60,12 +73,12 @@ class Picture extends Item{
     };
 };
 
-class Album extends Item{
+class Album extends Item{//Album hereda el id y el title
     private pictures: Picture[] = [];
 
     public constructor(id: number, title: string) {
-        super(id, title);//constructir de SUPER clase
-        // this.pictures = [];//de esta forma inicializaria la variable
+        super(id, title);//constructor de SUPER clase
+        this.pictures = [];
     }
 
     public addPicture(picture: Picture) {//este es el metodo que me permite agregar fotografias
@@ -84,3 +97,11 @@ picture.id = 100;//private, set id(100);
 picture.title = 'Another title';//private
 album.title = 'Personal Activities';//private
 console.log('album', album);
+
+//Cuando una Super clase
+//Clases Abstractas
+//las clases abstractas son la base de donde otras podrian derivarse.
+//A diferencia de una interfaz, una clase abstracta puede implementar
+//funciones para sus instancias.
+//palabra reservada abstract
+

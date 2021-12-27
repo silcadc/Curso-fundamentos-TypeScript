@@ -16,6 +16,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 exports.__esModule = true;
 //hemos reutilizado el cod del file clases-get-set.ts//
+//Herencia de clases y miembros protegidos
+//TS soporta este patron comun en el mundo de la POO.
+// implementa la habilidad de extender  cod de clases existentes
+// a traves de la herencia
 var PhotoOrientation;
 (function (PhotoOrientation) {
     PhotoOrientation["Landscape"] = "Landscape";
@@ -24,6 +28,8 @@ var PhotoOrientation;
     PhotoOrientation["Panorama"] = "Panorama";
 })(PhotoOrientation || (PhotoOrientation = {}));
 // SUPERclase
+//es la nueva clase donde podre definir las propiedades id y title, compartidas por
+//2 clases mas abajo
 var Item = /** @class */ (function () {
     function Item(id, title) {
         this._id = id;
@@ -55,7 +61,10 @@ var Item = /** @class */ (function () {
 var Picture = /** @class */ (function (_super) {
     __extends(Picture, _super);
     function Picture(id, title, orientation) {
-        var _this = _super.call(this, id, title) || this;
+        var _this = 
+        //los mismos valores, id, title, orientation a la hora de crear un obj
+        _super.call(this, id, title) || this;
+        //via la funcion super estoy invocando al constructor de la Super Clase Item
         _this._orientation = orientation;
         return _this;
     }
@@ -84,8 +93,8 @@ var Album = /** @class */ (function (_super) {
     function Album(id, title) {
         var _this = _super.call(this, id, title) || this;
         _this.pictures = [];
+        _this.pictures = [];
         return _this;
-        // this.pictures = [];//de esta forma inicializaria la variable
     }
     Album.prototype.addPicture = function (picture) {
         this.pictures.push(picture);
@@ -102,3 +111,9 @@ picture.id = 100; //private, set id(100);
 picture.title = 'Another title'; //private
 album.title = 'Personal Activities'; //private
 console.log('album', album);
+//Cuando una Super clase
+//Clases Abstractas
+//las clases abstractas son la base de donde otras podrian derivarse.
+//A diferencia de una interfaz, una clase abstracta puede implementar
+//funciones para sus instancias.
+//palabra reservada abstract
