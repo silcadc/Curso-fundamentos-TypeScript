@@ -59,10 +59,6 @@ const picture: Picture = new Picture(1, 'TypeScript', PhotoOrientation.Square);
 album.addPicture(picture);
 console.log('album', album);
 
-//clases miembros publicos
-//TS define un modificador de acceso publico por defecto para los miembros de cla.
-//Tambien es posible marcar un miembro como publico usando la palabra reservada public
-
 //accediendo a los miembros publicos que ahora son privados
 // picture.id = 100;//el acceso para cada uno de estos miembros es private
 // //nos impide que podamos cambiar sus estados
