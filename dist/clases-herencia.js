@@ -1,20 +1,3 @@
-"use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-exports.__esModule = true;
 //hemos reutilizado el cod del file clases-get-set.ts//
 //Herencia de clases y miembros protegidos
 //TS soporta este patron comun en el mundo de la POO.
@@ -30,79 +13,62 @@ var PhotoOrientation;
 // SUPERclase
 //es la nueva clase donde podre definir las propiedades id y title, compartidas por
 //2 clases mas abajo
-var Item = /** @class */ (function () {
-    function Item(id, title) {
+class Item {
+    constructor(id, title) {
         this._id = id;
         this._title = title;
     }
-    Object.defineProperty(Item.prototype, "id", {
-        get: function () {
-            return this._id;
-        },
-        set: function (id) {
-            this._id = id;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    Object.defineProperty(Item.prototype, "title", {
-        get: function () {
-            return this._title;
-        },
-        set: function (title) {
-            this._title = title;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Item;
-}());
+    get id() {
+        return this._id;
+    }
+    set id(id) {
+        this._id = id;
+    }
+    get title() {
+        return this._title;
+    }
+    set title(title) {
+        this._title = title;
+    }
+}
 //GET Y SET
-var Picture = /** @class */ (function (_super) {
-    __extends(Picture, _super);
-    function Picture(id, title, orientation) {
-        var _this = 
+class Picture extends Item {
+    constructor(id, title, orientation) {
         //los mismos valores, id, title, orientation a la hora de crear un obj
-        _super.call(this, id, title) || this;
+        super(id, title); //utilizo la palabra reservada super, como funion especial
         //via la funcion super estoy invocando al constructor de la Super Clase Item
-        _this._orientation = orientation;
-        return _this;
+        this._orientation = orientation;
     }
     ;
-    Object.defineProperty(Picture.prototype, "orientation", {
-        //Metodo Get y Set
-        get: function () {
-            return this._orientation;
-        },
-        set: function (o) {
-            this._orientation = o;
-        },
-        enumerable: false,
-        configurable: true
-    });
+    //Metodo Get y Set
+    get orientation() {
+        return this._orientation;
+    }
+    set orientation(o) {
+        this._orientation = o;
+    }
     // Comportamiento
-    Picture.prototype.toString = function () {
-        return "[id: ".concat(this.id, ",\n                title: ").concat(this.title, ",\n                orientation: ").concat(this.orientation, "\n                ]"); //utilizo los backticks para lograr una cadena
-    };
-    ;
-    return Picture;
-}(Item));
-;
-var Album = /** @class */ (function (_super) {
-    __extends(Album, _super);
-    function Album(id, title) {
-        var _this = _super.call(this, id, title) || this;
-        _this.pictures = [];
-        _this.pictures = [];
-        return _this;
+    toString() {
+        return `[id: ${this.id},
+                title: ${this.title},
+                orientation: ${this.orientation}
+                ]`; //utilizo los backticks para lograr una cadena
     }
-    Album.prototype.addPicture = function (picture) {
+    ;
+}
+;
+class Album extends Item {
+    constructor(id, title) {
+        super(id, title); //constructor de SUPER clase
+        this.pictures = [];
+        this.pictures = [];
+    }
+    addPicture(picture) {
         this.pictures.push(picture);
-    };
-    return Album;
-}(Item));
-var album = new Album(1, 'personal picture');
-var picture = new Picture(1, 'TypeScript', PhotoOrientation.Square);
+    }
+}
+const album = new Album(1, 'personal picture');
+const picture = new Picture(1, 'TypeScript', PhotoOrientation.Square);
 album.addPicture(picture);
 console.log('album', album);
 //accediendo a los miembros publicos con metodos accesores
@@ -111,9 +77,19 @@ picture.id = 100; //private, set id(100);
 picture.title = 'Another title'; //private
 album.title = 'Personal Activities'; //private
 console.log('album', album);
-//Cuando una Super clase
+
+//Cuando una Super clase llega a ser demaciado general y queremos evitar instancias
+//a partir de la misma, utilizamos las clases abstractas
 //Clases Abstractas
 //las clases abstractas son la base de donde otras podrian derivarse.
 //A diferencia de una interfaz, una clase abstracta puede implementar
 //funciones para sus instancias.
 //palabra reservada abstract
+//const item = new Item(1, 'test title');//Error no puedo instanciar un obj de Item
+//porque Item es una clase abstracta
+//console.log('item', item);//No tiene mucho sentido porque hay otras entidades que nos
+//interesan como usuario, album, picture, etc. Item por si mismo es muy general existe
+//una forma de controlar la instanciacion de los objetos a partir de la clase Item
+//a traves del uso de la palabra reservada abstracta, se puede anteponer a la definicion
+//de nuestra clase y esto significa para TS que no podemos proveer la creacion de obj
+//a partir de la misma.

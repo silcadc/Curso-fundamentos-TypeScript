@@ -16,7 +16,7 @@ enum PhotoOrientation {
 // SUPERclase
 //es la nueva clase donde podre definir las propiedades id y title, compartidas por
 //2 clases mas abajo
-class Item {
+abstract class Item {
     protected _id: number;//protected da acceso a las subclases,
     //no es publico ni privado, acceso intermedio
     protected _title: string;
@@ -98,10 +98,21 @@ picture.title = 'Another title';//private
 album.title = 'Personal Activities';//private
 console.log('album', album);
 
-//Cuando una Super clase
+//Cuando una Super clase llega a ser demaciado general y queremos evitar instancias
+//a partir de la misma, utilizamos las clases abstractas
+
 //Clases Abstractas
 //las clases abstractas son la base de donde otras podrian derivarse.
 //A diferencia de una interfaz, una clase abstracta puede implementar
 //funciones para sus instancias.
 //palabra reservada abstract
+
+//const item = new Item(1, 'test title');//Error no puedo instanciar un obj de Item
+//porque Item es una clase abstracta
+//console.log('item', item);//No tiene mucho sentido porque hay otras entidades que nos
+//interesan como usuario, album, picture, etc. Item por si mismo es muy general existe
+//una forma de controlar la instanciacion de los objetos a partir de la clase Item
+//a traves del uso de la palabra reservada abstracta, se puede anteponer a la definicion
+//de nuestra clase y esto significa para TS que no podemos proveer la creacion de obj
+//a partir de la misma.
 
